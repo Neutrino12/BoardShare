@@ -1,0 +1,24 @@
+<html>
+<head>
+<title>AddBoardPage</title>
+</head>
+
+<body>
+<h2>Add Board</h2>
+ <p>
+  {{error}}
+ </p>
+ <form action="{% url app_boardShare.views.add_new_board %}" method="post" name="addboard">{% csrf_token %}
+	<p>Title<input name="title" type="text"/><br>
+    </p>
+	<p>
+	Label<input name="label" type="text"/><br>
+	</p>
+	<p>
+	Description<br>
+	<textarea name="description"/></textarea><br>
+	</p>
+	<input name="Save" type="submit" value="Create"/>
+ </form>
+</body>
+</html>

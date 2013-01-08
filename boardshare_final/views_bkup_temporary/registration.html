@@ -1,0 +1,73 @@
+<html>
+<head>
+<title>RegistrationPage</title>
+</head>
+
+<body>
+
+ <div style="position:fixed; left:32px; top:38px; ">
+<h2>Registration<br></h2>
+ <p>
+  {{error}}
+ </p>
+ <form name="register" method="post" action="{% url app_boardShare.views.register_new_user %}">{% csrf_token %}
+ <table>
+  <tr>
+    <td>First Name</td>
+  </tr>
+  <tr>
+    <td><input name="firstName" type="text"  /></td>
+  </tr>
+  <tr>
+    <td>Last Name</td>
+  </tr>
+  <tr>
+    <td><input name="lastName" type="text" /></td>
+  </tr>
+   <tr>
+    <td>User Name</td>
+  </tr>
+  <tr>
+    <td><input name="userName" type="text"  /></td>
+  </tr>
+  <tr>
+    <td>Gender</td>
+  </tr>
+  <tr>
+    <td>
+     <input type="radio" name="sex" value="male">Male<br>
+	 <input type="radio" name="sex" value="female">Female
+    </td>
+  </tr>
+  <tr>
+    <td>Email Address</td>
+  </tr>
+  <tr>
+    <td><input name="emailAddress" type="text"  /></td>
+  </tr>
+  <tr>
+    <td>Confrim Email Address</td>
+  </tr>
+  <tr>
+    <td><input name="confirmEmail" type="text" /></td>
+  </tr>
+  <tr>
+    <td>Password</td>
+  </tr>
+  <tr>
+    <td><input name="password" type="password" /></td>
+  </tr>
+  <tr>
+    <td>Confrim Password</td>
+  </tr>
+  <tr>
+    <td><input name="confirmPassword" type="password" /></td>
+  </tr>
+  <tr>
+    <td><input name="Register" type="submit" value="Register"/></td>
+  </tr>
+ </table>
+ </form>
+ </div>
+</body>
+</html>

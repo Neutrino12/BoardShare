@@ -1,0 +1,279 @@
+<html>
+<head>
+<title>FrontPage</title>
+<style type="text/css">
+*{
+	margin:0;
+	padding:0;
+	z-index=-1;
+}
+						
+					a.dropdown{
+						text-decoration:none;
+						position: relative;
+						display: inline-block;
+						color: #524D4D;
+					}
+					
+					ul{
+						list-style-type:none;
+						}
+						
+					ul li.dropdown {
+						float:left;
+						width:88px;
+						height:38px;
+						line-height:38px;
+						background:yellow;
+						text-align:center;
+						}
+					ul li ul li.dropdown{
+						height:38px;
+						background:orange;
+						}
+					ul li a.dropdown{
+						width:90px;
+						height:38px;
+						}
+					
+					ul li a:hover{
+						background:orange;
+						}
+						
+					ul li ul{
+						visibility:hidden;
+						}
+					ul li:hover ul{
+						visibility:visible;
+						}
+								
+					.pin {
+					  width:192px; padding:10px; border:5px solid gray; margin:10px; top: 0px; float:left;
+					}					
+</style>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<script src="/static/jquery.masonry.min.js"></script>
+<script>
+$(window).load(function(){
+  $('#ShowPins').masonry({
+    // options
+    itemSelector : '.pin',
+  });
+});
+
+function category_submit(val)
+{
+document.getElementById("category").value=val.title;
+document.getElementById("categorybar").submit();
+}
+</script>
+<script language=javascript type='text/javascript'> 
+function hideDiv() { 
+if (document.getElementById) { // DOM3 = IE5, NS6 
+document.getElementById('hideShow').style.visibility = 'hidden'; 
+} 
+else { 
+if (document.layers) { // Netscape 4 
+document.hideShow.visibility = 'hidden'; 
+} 
+else { // IE 4 
+document.all.hideShow.style.visibility = 'hidden'; 
+} 
+} 
+}
+
+function showDiv(val) { 
+document.getElementById('HidPinImage').src = val.title; 
+if (document.getElementById) { // DOM3 = IE5, NS6 
+document.getElementById('hideShow').style.visibility = 'visible'; 
+} 
+else { 
+if (document.layers) { // Netscape 4 
+document.hideShow.visibility = 'visible'; 
+} 
+else { // IE 4 
+document.all.hideShow.style.visibility = 'visible'; 
+} 
+} 
+} 
+</script>
+</head>
+
+<body id="FrontPage">
+	
+		
+	<div class="Liquid Container" id="Header" style="	position:fixed; z-index:105;
+														top: 0;
+														right: 0;
+														left: 0;
+														height: 38px;
+														background-color: yellow;">
+		<ul class="Header" id="Navigation" style="position: relative; float: right; z-index: 105; background-color: yellow;">
+			<li class="dropdown">
+				<a class="dropdown">Add</a>
+				<ul class="dropdown">
+					<li class="dropdown">
+						<a href="{% url app_boardShare.views.add_new_pin %}" class="dropdown">Add Pins<a>
+					</li class="dropdown">
+					<li class="dropdown">
+						<a href="{% url app_boardShare.views.upload_new_pin %}" class="dropdown">Upload Pins<a>
+					</li>
+					<li class="dropdown">
+						<a href="{% url app_boardShare.views.add_new_board %}" class="dropdown">New Board<a>
+					</li>
+				</ul>
+			</li>
+			<li class="dropdown">
+				<a class="dropdown">{{ user.username }}</a>
+				<ul class="dropdown">
+					<li class="dropdown">
+						<a href="{% url app_boardShare.views.my_boards %}" class="dropdown">Boards<a>
+					</li>
+					<li class="dropdown">
+						<a href="{% url app_boardShare.views.my_pins %}" class="dropdown">Pins<a>
+					</li>
+					<li class="dropdown">
+						<a href="{% url app_boardShare.views.change_password %}" class="dropdown">Password<a>
+					</li>
+					<li class="dropdown">
+						<a href="{% url app_boardShare.views.modify_settings %}" class="dropdown">Profile<a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+		
+		<a href="{% url app_boardShare.views.all_pins %}"  class="BoardShare" style="display: block;
+			position: absolute;
+			width: 100px;
+			height: 26px;
+			top: 9px;
+			left: 50%;
+			margin-left: -25px;">Board Share</a>	
+		
+		<div id="SearchDiv" style="position:absolute; left:15px; top:10px;"> 
+			<form action="{% url app_boardShare.views.search_pins %}" method="get" name="searchbar" id="searchbar" class="text">
+				<input type="text" id="query" name="query" size="27" value="" placeholder="Search" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true">
+				<a id="query_button" onclick="document.searchbar.submit()"  class="lg"><img src="http://passets-ec.pinterest.com/images/search.gif" alt=""></a>
+			</form>
+		</div>
+	
+	</div>
+	
+	<form action="{% url app_boardShare.views.category_pins %}" method="gett" name="categorybar" id="categorybar">
+	<div id="CategoriesBar" style="position:fixed; text-align: center; z-index:100; left:0px; top:38px;  height:38px; width:100%; background-color: green; ">
+		<ul class="Liquid Container" style="position:absolute; left:50%; margin-left: -125px; top:0px; z-index:100;">
+			<input type="hidden" name="category" id="category" >
+			<li class="dropdown" style="background-color: green;">
+				<a class="dropdown" style="color:white;">
+					Categories
+				</a>
+				<ul id="CategroiesDropDown" class="dropdown">
+					{% for category in categories %}
+					<li class="dropdown" >
+						<a class="dropdown" title="{{ category }}" onclick="category_submit(this)" >
+								{{ category }}
+									</a>
+					</li>
+					{% endfor %}
+				</ul>
+			</li>
+			
+			<li class="dropdown" style="background-color: green;">
+				<a href="{% url app_boardShare.views.all_pins %}" class="dropdown" style="color:white;">
+					Everything
+				</a>
+			</li>
+			
+			<li class="dropdown" style="background-color: green;">
+				<a href="{% url app_boardShare.views.pop_pins %}" class="dropdown" style="color:white;">
+					Popularity
+				</a>
+			</li>
+			
+		</ul>
+	</div>
+	</form>
+
+		
+	<div id="hideShow"
+	style="position:fixed; left:0px; top:0px; height:100%; width:100%; z-index:300; visibility: hidden; "> 
+<div
+	style="position:fixed; left:0px; top:0px; height:100%; width:100%; z-index:500;  background-color: transparent; display:block;
+	background: gray; filter:alpha(opacity=70); opacity:0.7;"> </div>
+		<div class="pinhid" style="position:relative; left:350px; width:365px; padding:10px; border:5px solid gray; z-index:600;background: white; margin:10px; top: 0px; float:left;">
+			<div class="PinHolder">
+				<a href="javascript:hideDiv()" class="PinImage"><img id="HidPinImage" style="  width:360px; max-height:600px;  z-index:600;"></a>
+			</div>
+			<p class="description">Reminder: Click the image to close this view.</p>
+			<div class="PinAttribution"></div>
+		</div>
+</div>
+
+	<div id="ShowPins" style="position:absolute; left:32px; top:76px; width=100%;">
+		<div class="pin" >
+			<div class="PinHolder">
+				<a class="PinImage"></a>
+			</div>
+			<p class="description">Welcome to the world of free board sharing! -Ammar & Xiaoyi</p>
+			<div class="PinAttribution"></div>
+		</div>
+			{% for pin in pins %}	
+				<div class="pin" >
+						<div class="PinHolder">
+							
+								{% if pin.data_type == "image" %}
+								<a class="PinImage" onclick="showDiv(this)" title="{{pin.data_local}}">
+								<img src="{{pin.data_local}}"  class="PinImageImg" id="PinImageImg" style="width: 180px;">
+								</a>
+								{% elif pin.data_type == "uploaded_image" %}
+								<a class="PinImage" onclick="showDiv(this)" title="/../static/{{pin.data_local}}">
+								<img src="/../static/{{pin.data_local}}" class="PinImageImg" id="PinImageImg" style="width: 180px;">
+								</a>
+								{% else %}
+								<a class="PinImage" href="javascript:showDiv(this)" title="">
+								<iframe style="width: 180px; height:200px;" src="{{pin.data_local}}" frameborder="0" allowfullscreen></iframe>
+								</a>
+								{% endif %}
+							
+							<p class="description">{{pin.data_text}}</p>
+							<div class="actions">     
+							<form action="{% url app_boardShare.views.repin %}" method="POST"> {% csrf_token %}
+								<input name="pin_id" value="{{ pin.id }}" type = "hidden"> 
+								<input type="submit" value="Repin">
+							</form>
+							<form action="{% url app_boardShare.views.like %}" method="POST"> {% csrf_token %}
+								<input name="pin_id" value="{{ pin.id }}" type = "hidden"> 
+								<input type="submit" value="Like"> <a  style="color:gray;">{{pin.num_likes}} </a>Likes
+							</form> 
+							</div>
+	
+						</div>
+					
+					<div class="PinAttribution"><a  style="color:gray;">{{pin.user}}</a> on <a  style="color:gray;">{{pin.board_title}} </a></div>
+					
+					<div class="comment convo clearfix">             
+					{% for comment in comments %}
+						{% if comment.pin == pin %}
+						<p><img src="http://aux.iconpedia.net/uploads/19476921991116995615.png" style="width: 18px; height:18px;">
+						<a style="color:gray;">{{comment.user.username}}</a>: {{comment.content}}</p>
+						{% endif %}
+					{% endfor %}
+					</div>
+					
+					<div class="write convo clearfix">
+						<a class="ImgLink">
+						  <img style="width:24px; height:24px;" src="{{userdetails.data_local}}">
+						</a>
+						<form action="{% url app_boardShare.views.front_comment %}" method="POST">{% csrf_token %}
+						  <input type="hidden" name="pin_id" value="{{pin.id}}">
+						  <textarea name="content" maxlength="1000" placeholder="Add a comment..."></textarea><div class="tagmate-menu" style="position: absolute; display: none;"></div>
+						  <input type="submit" style="display: inline-block;" value="comment"></input>
+						</form>
+					</div>
+				</div>
+			{% endfor %}
+	</div>					
+	
+
+</body>
+</html>

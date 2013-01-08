@@ -1,0 +1,156 @@
+<html>
+<head>
+<title>UploadPinPage</title>
+<style type="text/css">
+*{
+	margin:0;
+	padding:0;
+	z-index=-1;
+}
+						
+					a.dropdown{
+						text-decoration:none;
+						position: relative;
+						display: inline-block;
+						color: #524D4D;
+					}
+					
+					ul{
+						list-style-type:none;
+						}
+						
+					ul li.dropdown {
+						float:left;
+						width:88px;
+						height:38px;
+						line-height:38px;
+						background:yellow;
+						text-align:center;
+						}
+					ul li ul li.dropdown{
+						height:38px;
+						background:orange;
+						}
+					ul li a.dropdown{
+						width:90px;
+						height:38px;
+						}
+					
+					ul li a:hover{
+						background:orange;
+						}
+						
+					ul li ul{
+						visibility:hidden;
+						}
+					ul li:hover ul{
+						visibility:visible;
+						}
+								
+					.pin {
+					  width:256px; padding:10px; border:5px solid gray; margin:10px; top: 0px; float:left;
+					}					
+</style>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<script src="/static/jquery.masonry.min.js"></script>
+<script>
+$(window).load(function(){
+  $('#ShowPins').masonry({
+    // options
+    itemSelector : '.pin',
+  });
+});
+
+function category_submit(val)
+{
+document.getElementById("category").value=val.title;
+document.getElementById("categorybar").submit();
+}
+</script>
+</head>
+
+<body>
+ 	<div class="Liquid Container" id="Header" style="	position:absolute;
+														top: 0;
+														right: 0;
+														left: 0;
+														height: 38px;
+														background-color: yellow;
+														position:fixed; z-index:105; ">
+		<ul class="Header" id="Navigation" style="position: relative; float: right; z-index: 105; background-color: yellow;">
+			<li class="dropdown">
+				<a class="dropdown">Add</a>
+				<ul class="dropdown">
+					<li class="dropdown">
+						<a href="{% url app_boardShare.views.add_new_pin %}" class="dropdown">Add Pins<a>
+					</li class="dropdown">
+					<li class="dropdown">
+						<a href="{% url app_boardShare.views.upload_new_pin %}" class="dropdown">Upload Pins<a>
+					</li>
+					<li class="dropdown">
+						<a href="{% url app_boardShare.views.add_new_board %}" class="dropdown">New Board<a>
+					</li>
+				</ul>
+			</li>
+			<li class="dropdown">
+				<a class="dropdown">{{ user.username }}</a>
+				<ul class="dropdown">
+					<li class="dropdown">
+						<a href="{% url app_boardShare.views.my_boards %}" class="dropdown">Boards<a>
+					</li>
+					<li class="dropdown">
+						<a href="{% url app_boardShare.views.my_pins %}" class="dropdown">Pins<a>
+					</li>
+					<li class="dropdown">
+						<a href="{% url app_boardShare.views.change_password %}" class="dropdown">Password<a>
+					</li>
+					<li class="dropdown">
+						<a href="{% url app_boardShare.views.modify_settings %}" class="dropdown">Profile<a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+		
+		<a href="{% url app_boardShare.views.all_pins %}"  class="BoardShare" style="display: block;
+			position: absolute;
+			width: 100px;
+			height: 26px;
+			top: 9px;
+			left: 50%;
+			margin-left: -25px;">Board Share</a>	
+
+		<div id="SearchDiv" style="position:absolute; left:15px; top:10px;"> 
+			<form action="{% url app_boardShare.views.search_pins %}" method="get" name="searchbar" id="searchbar" class="text">
+				<input type="text" id="query" name="query" size="27" value="" placeholder="Search" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true">
+				<a id="query_button" onclick="document.searchbar.submit()"  class="lg"><img src="http://passets-ec.pinterest.com/images/search.gif" alt=""></a>
+			</form>
+		</div>
+	
+	</div>
+ 
+ <div style="position:fixed; left:32px; top:78px; ">
+ <form enctype="multipart/form-data" action="{% url app_boardShare.views.upload_new_pin %}" method="post" name="upload_feature" > {% csrf_token %}
+    <h2>Upload Pin</h2>
+ <p>
+  {{error}}
+ </p>
+	<br>
+	<p>
+	Description<br>
+	<textarea name="description"/></textarea>
+	</p><br>
+	<p>
+	Please specify a image file to upload as pin:</br>
+	<input type="file" name="pinfile">
+	</p><br>
+	<p>Choose a board:<br/><select name="board"  style="width: 100px">
+	{% for board in boards %}
+        <option value="{{board.id}}">{{ board.title }}({{board.category}},{{board.id}})</option>
+ 	{% endfor %}
+	</select>
+	</p><br>
+	<p><input name="Save" type="submit" value="Upload"/></p>
+ </form>
+ </div>
+</body>
+</html>

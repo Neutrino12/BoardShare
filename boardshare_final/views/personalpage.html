@@ -1,0 +1,220 @@
+<html>
+<head>
+<title>PersonalPage</title>
+<style type="text/css">
+					*{
+					margin:0;
+					padding:0;
+					}
+					
+					ul.Header{
+						position:absolute;
+					    left:900px;
+						top:10px;
+						}
+					a.BoardShare{
+						position:absolute;
+					    left:600px;
+						top:10px;
+						}
+					span.Search{
+						position:absolute;
+					    left:50px;
+						top:10px;
+						}
+						
+					a.dropdown{
+					    color:#004000;
+						text-decoration:none;
+					}
+					ul{
+						list-style-type:none;
+						}
+					ul li.dropdown {
+						float:left;
+						width:88px;
+						height:30px;
+						line-height:30px;
+						background:green;
+						border-right: 2px solid #fff;
+						text-align:center;
+						}
+					ul li ul li.dropdown{
+						height:28px;
+						background:orange;
+					     border-top:2px solid #fff;
+						}
+					ul li a.dropdown{
+						display:block;
+						width:90px;
+						height:30px;
+						}
+					
+					ul li a:hover{
+						background:#004000;
+						}
+						
+					ul li ul{
+						visibility:hidden;
+						}
+					ul li:hover ul{
+						visibility:visible;
+						}
+						
+					div.ProfileHeader{
+						position:absolute;
+					    left:500px;
+						top:100px;
+						}
+						
+					div.SwitchBar{
+						position:absolute;
+					    left:500px;
+						top:300px;
+						}
+						
+					div.ShowBoards{
+						position:absolute;
+					    left:100px;
+						top:400px;
+						}
+						
+					div.ShowPins{
+						position:absolute;
+					    left:600px;
+						top:400px;
+						}
+					</style>
+</head>
+
+<body id="PersonalPage">
+	<div class="Header">
+		<a href="frontpage.html" class="BoardShare">Board Share</a>	
+
+		<span id="Search" class="Search">
+		<form action="/search/" method="get" class="text">
+			<input type="text" id="query" name="q"></input>
+			<input type="submit"></input>
+			</a>
+		</form>
+		</span>
+
+		<ul class="Header" id="Navigation">
+			<li class="dropdown">
+				<a href="#" class="dropdown">Add</a>
+				<ul class="dropdown">
+					<li class="dropdown">
+						<a href="addpin.html" class="dropdown">Add Pins<a>
+					</li class="dropdown">
+					<li class="dropdown">
+						<a href="uploadpin.html" class="dropdown">Upload Pins<a>
+					</li>
+					<li class="dropdown">
+						<a href="addboard.html" class="dropdown">Create Board<a>
+					</li>
+				</ul>
+			</li>
+			<li class="dropdown">
+				<a href="/username/" class="dropdown">User Name</a>
+				<ul class="dropdown">
+					<li class="dropdown">
+						<a href="/username/boards/" class="dropdown">Boards<a>
+					</li>
+					<li class="dropdown">
+						<a href="/username/pins/" class="dropdown">Pins<a>
+					</li>
+					<li class="dropdown">
+						<a href="resetpassword.html" class="dropdown">Password<a>
+					</li>
+					<li class="dropdown">
+						<a href="settings.html" class="dropdown">Edit<a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	
+	
+	<div class="ProfileHeader">
+		<img src="profile pic"></img>
+		<div class="Content">
+			<h1>UserName</h1>
+			<p class="user description">{{user.userdetails.about_me}}</p>
+			<p>
+			{% if boardContent %}
+				Your boards will be displayed here:<br>
+				{% if boards %}
+			    	{% for board in boards %}
+        				<li>{{ board.title }}</li>
+    				{% endfor %}
+    			{% else %}
+    				You have not created any boards
+    			{% endif %}
+    		{% elif pinContent %}
+				Your pins will be displayed here:<br>
+				{% if pins %}
+			    	{% for pin in pins %}
+        				<li>{{ pin.title }}</li>
+    				{% endfor %}
+    			{% else %}			
+					You have not created any pins yet 
+    			{% endif %}   		
+    		{% endif %}
+			</p>
+		</div>
+		<div class="ProfileRepins"><h3>Repins from</h3>
+		<ul>
+			<li>
+				<a href=""><img src=""></img></a>
+			</li>
+		</ul>
+		</div>
+		<div class="actions">
+			<a href="settings.html" class="edit profile">Edit Profile</a>
+		</div>
+	</div>
+	
+	
+	<div class="SwitchBar">
+		<ul class="dropdown">
+			<li class="dropdown">
+				<a href="/username/boards" class="dropdown">Boards</a>
+			</li>
+			<li class="dropdown">
+				<a href="/username/pins" class="dropdown">Pins</a>
+			</li>
+		</ul>
+	</div>
+	
+	
+	<div class="ShowPins">
+		<div class="pin">
+			<div class="PinHolder">(Pin Picture)
+				<a class="PinButton">Like</a>
+				<a class="PinButton" href="repin.html">Repin</a>
+				<p class="PinDescription">(description)</p>
+			</div>
+			<div class="PinAttribution">Who via What on Where</div>
+		</div>
+	</div>
+	
+	
+	<div class="ShowBoards">
+		<div id="ColumnContainer">
+			<div class="board">
+			<ul class="sortable">
+				<div class="BoardHolder">(Pin Picture)
+					<span class="cover"><img src=""></img></span>
+					<span class="thumbs"><img src=""></img></span>
+				</div>
+				<div class="EditBoard">
+					<a href="editboard.html">Edit</a>
+				</div>
+			</ul>
+			</div>
+		</div>
+	</div>
+	
+	
+</body>
+</html>

@@ -1,0 +1,69 @@
+<html>
+<head>
+<title>RegistrationPage</title>
+</head>
+
+<body>
+<<<<<<< .mine
+<h2>Register yourself:</h2>
+ <form action="Registrationage" ">
+=======
+<h2>Register yourself:</h2>
+ <p>
+  {{error}}
+ </p>
+ <form name="register" method="post" action="{% url app_boardShare.views.register_new_user %}">{% csrf_token %}
+>>>>>>> .r15
+ <table>
+  <tr>
+    <td>Basic Info</td>
+  </tr>
+  <tr>
+    <td>Name</td>
+  </tr>
+  <tr>
+<<<<<<< .mine
+    <td><input name="FirstName" type="text" /></td>
+    <td><input name="LastName" type="text" /></td>
+=======
+    <td><input name="firstName" type="text"  /></td>
+    <td><input name="lastName" type="text" /></td>
+>>>>>>> .r15
+  </tr>
+   <tr>
+    <td>User Name</td>
+  </tr>
+  <tr>
+    <td><input name="userName" type="text"  /></td>
+  </tr>
+  <tr>
+    <td>Email Address</td>
+  </tr>
+  <tr>
+    <td><input name="emailAddress" type="text"  /></td>
+  </tr>
+  <tr>
+    <td>Confrim Email Address</td>
+  </tr>
+  <tr>
+    <td><input name="confirmEmail" type="text" /></td>
+  </tr>
+  <tr>
+    <td>Password</td>
+  </tr>
+  <tr>
+    <td><input name="password" type="password" /></td>
+  </tr>
+  <tr>
+    <td>Confrim Password</td>
+  </tr>
+  <tr>
+    <td><input name="confirmPassword" type="password" /></td>
+  </tr>
+  <tr>
+    <td><input name="Register" type="submit" value="Register"/></td>
+  </tr>
+ </table>
+ </form>
+</body>
+</html>

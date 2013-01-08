@@ -1,0 +1,30 @@
+from django.conf.urls import patterns, url
+
+from app_boardShare import views
+
+urlpatterns = patterns('',
+    url(r'^$', views.boardShare_main, name='main'),
+    url(r'^login/$', views.boardShare_main, name='main'),
+    url(r'^personal/$', views.display_personal_page, name='personal'),
+    url(r'^settings/$', views.modify_settings, name='settings'),
+	url(r'^search/$', views.display_search, name='search'),
+	url(r'^search/pins/$', views.search_pins, name='search_pins'),
+	url(r'^search/boards/$', views.search_boards, name='search_boards'),
+	url(r'^search/pinners/$', views.search_pinners, name='search_pinners'),
+    url(r'^addpin/$', views.add_new_pin, name='addpin'),
+    url(r'^uploadpin/$', views.upload_new_pin, name='uploadpin'),
+    url(r'^addboard/$', views.add_new_board, name='addboard'),
+    url(r'^editboard/$', views.edit_board, name='editboard'),
+    url(r'^personal/mypins/$', views.my_pins, name='mypins'),
+    url(r'^personal/myboards/$', views.my_boards, name='myboards'),
+    url(r'^change_password/$', views.change_password, name='changepassword'),
+    url(r'^front/$', views.display_front_page, name='front'),
+    url(r'^front/allpins$', views.all_pins, name='allpins'),
+    url(r'^front/categorypins$', views.category_pins, name='categorypins'),
+    url(r'^front/popins$', views.pop_pins, name='popins'),
+    url(r'^front/allboards$', views.all_boards, name='allboards'),
+    url(r'^front/repin$', views.repin, name='repin'),
+    url(r'^front/like$', views.like, name='like'),
+	url(r'^front/comment$', views.front_comment, name='front_comment'),
+    url(r'^register/$', views.register_new_user, name='register'),
+)

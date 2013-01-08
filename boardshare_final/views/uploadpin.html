@@ -1,0 +1,33 @@
+<html>
+<head>
+<title>UploadPinPage</title>
+</head>
+
+<body>
+<h2>Upload Pin</h2>
+ <p>
+  {{error}}
+ </p>
+
+ <form enctype="multipart/form-data" action="{% url app_boardShare.views.upload_new_pin %}" method="post" name="upload_feature" > {% csrf_token %}
+    <p>
+	<img src="url" alt="some_text"><br>
+	</p>
+	<p>
+	Description<br>
+	<textarea name="description"/></textarea><br>
+	</p>
+	<p>
+	Please specify a file, or a set of files:<br>
+	<input type="file" name="pinfile">
+	</p>
+	<select name="board">
+		{% for board in boards %}
+        	<option>{{ board.title }}</option>
+ 		{% endfor %}
+	</select>
+	
+	<input name="Save" type="submit" value="Upload"/>
+ </form>
+</body>
+</html>

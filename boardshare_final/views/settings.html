@@ -1,0 +1,20 @@
+<html>
+<head>
+<title>SettingsPage</title>
+</head>
+
+<body>
+<h2>Your Profile</h2>
+ <form action="{% url app_boardShare.views.modify_settings %}" method="post" name="settings">{% csrf_token %}
+	Email Address<input name="emailAddress" type="text"  /><br>
+    Gender<br>
+    <input type="radio" name="sex" value="male">Male<br>
+	<input type="radio" name="sex" value="female">Female<br>
+	First Name<input name="firstName" type="text"  /><br>
+	Last Name<input name="lastName" type="text" /><br>
+	About Me:<br>
+	<textarea name="aboutMe"/></textarea><br>
+	<input name="Save" type="submit" value="Save Setting"/>
+ </form>
+</body>
+</html>

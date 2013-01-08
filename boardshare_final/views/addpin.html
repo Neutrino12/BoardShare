@@ -1,0 +1,18 @@
+<html>
+<head>
+<title>AddPinPage</title>
+</head>
+
+<body>
+<h2>Add Pin</h2>
+ <form action="{% url app_boardShare.views.add_new_pin %}" method="post" name="add_feature"> {% csrf_token %}
+    <p>Description<br>
+	<textarea name="description"/></textarea><br>
+	</p>
+	<p>
+	Link<input name="link" type="text"  /><br>
+	</p>
+	<input name="Save" type="submit" value="Add"/>
+ </form>
+</body>
+</html>

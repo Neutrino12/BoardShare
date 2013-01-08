@@ -1,0 +1,54 @@
+*{
+	margin:0;
+	padding:0;
+	z-index=-1;
+}
+					
+					a.BoardShare{
+						position:absolute;
+					    left:600px;
+						top:10px;
+						}
+						
+					a.dropdown{
+						text-decoration:none;
+						position: relative;
+						display: inline-block;
+						color: #524D4D;
+					}
+					
+					ul{
+						list-style-type:none;
+						}
+						
+					ul li.dropdown {
+						float:left;
+						width:88px;
+						height:38px;
+						line-height:38px;
+						background:yellow;
+						text-align:center;
+						}
+					ul li ul li.dropdown{
+						height:38px;
+						background:orange;
+						}
+					ul li a.dropdown{
+						width:90px;
+						height:38px;
+						}
+					
+					ul li a:hover{
+						background:orange;
+						}
+						
+					ul li ul{
+						visibility:hidden;
+						}
+					ul li:hover ul{
+						visibility:visible;
+						}
+								
+					.pin {
+					  width:248px; padding:10px; border:5px solid gray; margin:10px; top: 0px; float:left;
+					}

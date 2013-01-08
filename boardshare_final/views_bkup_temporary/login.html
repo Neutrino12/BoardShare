@@ -1,0 +1,34 @@
+<html>
+<head>
+<title>LoginPage</title>
+</head>
+
+
+<div
+	style="position:fixed; left:0px; top:192px; height:200px; width:350px; background-color: green; display:block;
+	background: green; "> 
+  <div style="position:fixed; left:16px;"><h1 style="color:white">Board<br>Share</h1></div>	
+		</div>
+
+<div style="position:fixed; left:350px; top:192px; height:200px; width:100%; background-color: yellow; 
+	background: yellow;">
+
+ <form name="login" action="{% url app_boardShare.views.boardShare_main %}" style="position:fixed; left:372px; top:212px;"method="post">{% csrf_token %}
+ <p>
+  {{error}}
+ </p> 
+<table >
+ <tr>
+ <td>Username: <input type="text" name="user"></td>
+ </tr>
+ <tr>
+ <td>Password: <input type="password" name="pwd"></td>
+ </tr>
+ <tr>
+ <td><input type="submit" value="login">
+</form> </br>
+or </br><a href="{% url app_boardShare.views.register_new_user %}">CLICK to register!</a></td>
+ </tr>
+ </table>
+</div>
+</html>
